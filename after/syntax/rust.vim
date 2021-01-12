@@ -361,11 +361,14 @@ syntax match rsDelimiter '[(){}\[\]|\.,:;]\+'
 "
 
 syntax match rsOperator '[!%&/\*+<=>?\^-]\+'
+syntax match rsAmpersand '[&]\([a-zA-z]\)\@='
+"syntax match rsAmpersand '&'
+"syntax match rsOperator '[!%&/\*+<=>?\^-]\+'
 
 " We highlight mutable references separately as an operator because otherwise
 " they would be recognised as the ‘mut’ keyword, thus whatever comes after the
 " ‘mut’ is highlighted as an identifier definition.
-syntax match rsOperator '&mut'
+" syntax match rsOperator '&mut'
 
 "
 " Comments
@@ -383,12 +386,12 @@ syntax match rsCommentNote '\v[A-Z]+(:)@='
             \ containedin=rsComment,rsDocComment
 
 " The matchgroup highlights the ‘```’ as part of the surrounding comment.
-syntax region rsDocTest
-            \ matchgroup=rsDocComment 
-            \ start='```'
-            \ end='```'
-            \ contains=TOP
-            \ containedin=rsDocComment
+"syntax region rsDocTest
+"            \ matchgroup=rsDocComment
+"            \ start='```'
+"            \ end='```'
+"            \ contains=TOP
+"            \ containedin=rsDocComment
 
 " This is used to ‘match away’ the ‘///’ at the start of each line in a
 " doctest. It is only allowed to exist within doctests.
@@ -431,6 +434,7 @@ highlight default link rsLibraryType Type
 highlight default link rsLifetimeDef Special
 highlight default link rsNumber Number
 highlight default link rsOperator Operator
+highlight default link rsAmpersand Operator
 highlight default link rsQuote StringDelimiter
 highlight default link rsRepeat Repeat
 highlight default link rsSpecialLifetime Special
